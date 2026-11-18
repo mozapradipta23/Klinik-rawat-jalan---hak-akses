@@ -8,14 +8,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserHasRole
 {
-    public function handle(Request $request, Closure $next, string ...$roles): Response
+    /**
+     * Handle an incoming request.
+     *
+     * @param  Closure(Request): (Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
     {
-        $user = $request->user();
-
-        if (! $user || ! in_array($user->role, $roles, true)) {
-            abort(403, 'Anda tidak diizinkan.');
-        }
-
         return $next($request);
     }
 }
